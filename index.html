@@ -1,1 +1,54 @@
+<!doctype html>
 
+<style>
+    h1 {
+        font-family: 'Pirata One', cursive;
+        font-weight: 300;
+        text-align: center;
+        font-size: 50px;
+    }
+
+    p {
+        font-family: 'Pirata One', cursive;
+        text-align: center;
+        font-size: 20px;
+        letter-spacing: 2px;
+    }
+</style>
+
+
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Pirate Hangman</title>
+    <link href="https://fonts.googleapis.com/css?family=Pirata+One" rel="stylesheet">
+</head>
+
+<body>
+    <div class="container">
+        <h1>Pirate Style Hangman</h1>
+    </div>
+    <div id="game-play">
+        <p>Arrrrrrr matey!! Beware!!! Ye who presses a letter begins a game of hangman!!</p>
+        <div id="progress"></div>
+        <div id="guesses"></div>
+    </div>
+</body>
+
+<script type="text/javascript">
+    var dictionary = [
+    'parrot', 'cannon', 'jolly rodger', 'blackbeard', 
+    'treasure', 'rum', 'walk the plank', 'scallywag', 'scurvy', 
+    'swashbuckler', 'Nassau', 'shiver me timbers', 'poop deck', 
+    'ahoy, matey', 'buccaneer', 'booty', 'anne bonny', 'charles vane', 
+    'calico jack', 'seadog'
+    ];
+    var wins = 0;
+    var losses = 0;
+    var guessLeft = 7;
+    var usedLetters = [];
+    var currentWord = dictionary[Math.floor(Math.random()*dictionary.length)];
+</script>
+
+</html>
