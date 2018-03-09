@@ -36,6 +36,8 @@
     </div>
 </body>
 
+
+
 <script type="text/javascript">
     var dictionary = [
     'parrot', 'cannon', 'jolly rodger', 'blackbeard', 
@@ -48,7 +50,18 @@
     var losses = 0;
     var guessLeft = 7;
     var usedLetters = [];
+    //picks a random word from the dictionary above
     var currentWord = dictionary[Math.floor(Math.random()*dictionary.length)];
+
+
+    // replaces letters in the random word with an _
+    var answerArray = []
+    for (var i = 0; i < currentWord.length; i++) {
+        answerArray[i] = "_";
+    }
+
+    console.log(answerArray)
+
 </script>
 
 </html>
