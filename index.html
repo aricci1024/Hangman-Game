@@ -14,6 +14,11 @@
         font-size: 20px;
         letter-spacing: 2px;
     }
+
+    #gameplay {
+        margin: 20px;
+        background-color: aqua;
+    }
 </style>
 
 
@@ -29,10 +34,11 @@
     <div class="container">
         <h1>Pirate Style Hangman</h1>
     </div>
-    <div id="game-play">
+    <div>
         <p>Arrrrrrr matey!! Beware!!! Ye who presses a letter begins a game of hangman!!</p>
-        <div id="progress"></div>
-        <div id="guesses"></div>
+        <div id="gameplay"><p>_ _ _ _ _</p></div>
+        <p class="progress"></p>
+        <p class="guesses"></p>
     </div>
 </body>
 
@@ -40,28 +46,62 @@
 
 <script type="text/javascript">
     var dictionary = [
-    'parrot', 'cannon', 'jolly rodger', 'blackbeard', 
-    'treasure', 'rum', 'walk the plank', 'scallywag', 'scurvy', 
-    'swashbuckler', 'Nassau', 'shiver me timbers', 'poop deck', 
-    'ahoy, matey', 'buccaneer', 'booty', 'anne bonny', 'charles vane', 
-    'calico jack', 'seadog'
+        'parrot', 'cannon', 'jolly rodger', 'blackbeard', 
+        'treasure', 'rum', 'walk the plank', 'scallywag', 'scurvy', 
+        'swashbuckler', 'Nassau', 'shiver me timbers', 'poop deck', 
+        'ahoy, matey', 'buccaneer', 'booty', 'anne bonny', 'charles vane', 
+        'calico jack', 'seadog'
     ];
     var wins = 0;
     var losses = 0;
-    var guessLeft = 7;
-    var usedLetters = [];
-    //picks a random word from the dictionary above
-    var currentWord = dictionary[Math.floor(Math.random()*dictionary.length)];
+    var guessesLeft = 6;
+    var wrongLetters = [];
+    var userGuesses = [];
+    var answerArray = [];
+    var currentWord;
+    
+    function gameStart () {
+        //picks a random word from the dictionary above
+        currentWord = dictionary[Math.floor(Math.random()*dictionary.length)];
+        console.log("word is: " + currentWord)    
+        // replaces letters in the random word with an _
+        for (var i = 0; i < currentWord.length; i++) {
+            answerArray.push("_");
+        }
+        //console.log(answerArray)
+        //replaces , separating _'s with spaces
+        //document.getElementById("#gameplay").innerHTML = answerArray.join(" ");
+    
+        // reset
+        var wringLetters = [];
+        var userGuesses = [];
+        var answerArray = [];
+        var guessesLeft = 6;
 
+        //document.getElementById("#progress").innerHTML = guessesLeft; 
 
-    // replaces letters in the random word with an _
-    var answerArray = []
-    for (var i = 0; i < currentWord.length; i++) {
-        answerArray[i] = "_";
     }
 
-    console.log(answerArray)
+    //user press a key
+    document.onkeyup = function(event) {
+        userGuesses = event.key;
+
+        //checks if letter pressed is in the word
+        if (userGuesses.indexOf(currentWord) > -1) { 
+            for (var i = 0; i < currentWord.length; i++) {
+                if (currentWord[i] === userGuesses) {
+                    answerArray[i] = userGuesses;
+                    //console.log(answerArray);
+                }
+            }
+        } 
+        else {
+            wrongLetters.push(userGuesses);
+            guessesLeft--;
+        }
+    }
+
+
 
 </script>
-
 </html>
