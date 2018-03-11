@@ -18,6 +18,36 @@
     #gameplay {
         margin: 20px;
         background-color: aqua;
+        text-align: center;
+        font-family: 'Pirata One', cursive;
+    }
+
+    #lives {
+        margin: 20px;
+        text-align: center;
+        background-color: burlywood;
+        font-family: 'Pirata One', cursive;
+    }
+
+    #wins {
+        margin: 20px;
+        text-align: center;
+        background-color:lavender;
+        font-family: 'Pirata One', cursive;
+    }
+
+    #loss {
+        margin: 20px;
+        text-align: center;
+        background-color:lightgreen;
+        font-family: 'Pirata One', cursive;
+    }
+
+    #guessed {
+        margin: 20px;
+        text-align: center;
+        background-color:rgb(238, 144, 160);
+        font-family: 'Pirata One', cursive;
     }
 </style>
 
@@ -36,9 +66,11 @@
     </div>
     <div>
         <p>Arrrrrrr matey!! Beware!!! Ye who presses a letter begins a game of hangman!!</p>
-        <div id="gameplay"><p>_ _ _ _ _</p></div>
-        <p class="progress"></p>
-        <p class="guesses"></p>
+        <div id="gameplay"><h2></h2></div>
+        <div id="lives"><h3>Guesses Left: </h3></div>
+        <div id="wins"><h3>Wins: </h3></div>
+        <div id="loss"><h3>Losses: </h3></div>
+        <div id="guessed"><h3>Guessed Letters: </h3></div>
     </div>
 </body>
 
@@ -46,61 +78,86 @@
 
 <script type="text/javascript">
     var dictionary = [
-        'parrot', 'cannon', 'jolly rodger', 'blackbeard', 
-        'treasure', 'rum', 'walk the plank', 'scallywag', 'scurvy', 
-        'swashbuckler', 'Nassau', 'shiver me timbers', 'poop deck', 
-        'ahoy, matey', 'buccaneer', 'booty', 'anne bonny', 'charles vane', 
-        'calico jack', 'seadog'
+        'parrot', 'cannon', 'blackbeard', 
+        'treasure', 'rum', 'scallywag', 'scurvy', 
+        'swashbuckler', 'nassau',
+        'matey', 'buccaneer', 'booty', 'ahoy', 'seadog'
     ];
     var wins = 0;
+    var winCount = 0;
     var losses = 0;
+    var worongWord = document.getElementById('guesses');
     var guessesLeft = 6;
     var wrongLetters = [];
     var userGuesses = [];
+    var usedLetters = [];
     var answerArray = [];
-    var currentWord;
-    
+    var currentWord = dictionary[Math.floor(Math.random()*dictionary.length)];
+
     function gameStart () {
-        //picks a random word from the dictionary above
-        currentWord = dictionary[Math.floor(Math.random()*dictionary.length)];
-        console.log("word is: " + currentWord)    
+            console.log("word is: " + currentWord)    
         // replaces letters in the random word with an _
         for (var i = 0; i < currentWord.length; i++) {
             answerArray.push("_");
         }
-        //console.log(answerArray)
-        //replaces , separating _'s with spaces
-        //document.getElementById("#gameplay").innerHTML = answerArray.join(" ");
-    
-        // reset
-        var wringLetters = [];
-        var userGuesses = [];
-        var answerArray = [];
-        var guessesLeft = 6;
+        console.log(answerArray);
 
-        //document.getElementById("#progress").innerHTML = guessesLeft; 
-
+        //replaces , separating _'s with spaces and appears in html
+        document.getElementById("gameplay").textContent = answerArray.join(" ");
+        document.getElementById("lives").textContent = "Guesses Left: " + guessesLeft;
+        
     }
+        
+    gameStart ();
 
     //user press a key
+    
     document.onkeyup = function(event) {
         userGuesses = event.key;
 
         //checks if letter pressed is in the word
-        if (userGuesses.indexOf(currentWord) > -1) { 
-            for (var i = 0; i < currentWord.length; i++) {
-                if (currentWord[i] === userGuesses) {
-                    answerArray[i] = userGuesses;
-                    //console.log(answerArray);
+        if (currentWord.indexOf(userGuesses) > -1) { 
+            for (var j = 0; j < currentWord.length; j++) {
+                if (currentWord[j] === userGuesses) {
+                    answerArray[j] = userGuesses;
+                    console.log(answerArray);
+                    winCount ++;
+                    console.log(winCount);
+                    win ();
                 }
             }
         } 
         else {
             wrongLetters.push(userGuesses);
             guessesLeft--;
+            loss ();
+            console.log(guessesLeft);
         }
+
+        document.getElementById("guessed").textContent = "Guesses Left: " + wrongLetters;
+    
+    gameStart();
+
+    }
+    
+    function loss () {
+        if (guessesLeft === 0){
+            alert("Ye be out of guesses!! Time to walk the plank!")
+            losses ++;
+        }
+    document.getElementById("loss").textContent = "Losses: " + losses;
     }
 
+    function win () {
+        if (winCount === currentWord.length) {
+            alert("Correct! Ye shall live another day!")
+            wins ++;
+        }
+    document.getElementById("wins").textContent = "Wins: " + wins;
+    }
+
+//no repeat letters
+//get rid of the duplicating loop part
 
 
 </script>
