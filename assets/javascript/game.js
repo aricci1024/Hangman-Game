@@ -55,7 +55,7 @@ function game () {
                 }
             }
         
-        document.getElementById("guessed").textContent = "Guessed Left: " + wrongLetters;
+        document.getElementById("guessed").textContent = "Incorrectly Letters: " + wrongLetters;
         document.getElementById("lives").textContent = "Guesses Left: " + guessesLeft;
     }
 }
