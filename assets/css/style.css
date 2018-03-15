@@ -1,0 +1,61 @@
+body{
+    background: url("../images/pexels-photo-235985.jpeg");
+}
+
+h1 {
+    font-family: 'Pirata One', cursive;
+    font-weight: 300;
+    text-align: center;
+    font-size: 50px;
+    
+}
+
+img {
+    height:200px;
+    width:400px;
+    padding-left:34%;
+    padding-top: 30px;
+}
+
+p {
+    font-family: 'Pirata One', cursive;
+    text-align: center;
+    font-size: 30px;
+    letter-spacing: 2px;
+    color: rgb(129, 12, 12);
+}
+
+#gameplay {
+    margin: 20px;
+    background-color: white;
+    text-align: center;
+    font-family: 'Pirata One', cursive;
+}
+
+#lives {
+    margin: 20px;
+    text-align: center;
+    background-color: white;
+    font-family: 'Pirata One', cursive;
+}
+
+#wins {
+    margin: 20px;
+    text-align: center;
+    background-color:white;
+    font-family: 'Pirata One', cursive;
+}
+
+#loss {
+    margin: 20px;
+    text-align: center;
+    background-color:white;
+    font-family: 'Pirata One', cursive;
+}
+
+#guessed {
+    margin: 20px;
+    text-align: center;
+    background-color:white;
+    font-family: 'Pirata One', cursive;
+}

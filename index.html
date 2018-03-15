@@ -1,71 +1,22 @@
 <!doctype html>
-
-<style>
-    h1 {
-        font-family: 'Pirata One', cursive;
-        font-weight: 300;
-        text-align: center;
-        font-size: 50px;
-    }
-
-    p {
-        font-family: 'Pirata One', cursive;
-        text-align: center;
-        font-size: 20px;
-        letter-spacing: 2px;
-    }
-
-    #gameplay {
-        margin: 20px;
-        background-color: aqua;
-        text-align: center;
-        font-family: 'Pirata One', cursive;
-    }
-
-    #lives {
-        margin: 20px;
-        text-align: center;
-        background-color: burlywood;
-        font-family: 'Pirata One', cursive;
-    }
-
-    #wins {
-        margin: 20px;
-        text-align: center;
-        background-color:lavender;
-        font-family: 'Pirata One', cursive;
-    }
-
-    #loss {
-        margin: 20px;
-        text-align: center;
-        background-color:lightgreen;
-        font-family: 'Pirata One', cursive;
-    }
-
-    #guessed {
-        margin: 20px;
-        text-align: center;
-        background-color:rgb(238, 144, 160);
-        font-family: 'Pirata One', cursive;
-    }
-</style>
-
-
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <title>Pirate Hangman</title>
     <link href="https://fonts.googleapis.com/css?family=Pirata+One" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="assets/css/reset.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+    
 </head>
 
 <body>
     <div class="container">
-        <h1>Pirate Style Hangman</h1>
+        <img src="assets/images/skull-307778_640.png" class="img" alt="pirate flag">
+        <h1>Pirate Hangman</h1>
     </div>
     <div>
-        <p>Arrrrrrr matey!! Beware!!! Ye who presses a letter begins a game of hangman!!</p>
+        <p>Arrrrrrr matey!! Beware!! Fer if ye guess a letter ye begin a game o' Hangman!!</p>
         <div id="gameplay"><h2></h2></div>
         <div id="lives"><h3>Guesses Left: </h3></div>
         <div id="wins"><h3>Wins: </h3></div>
@@ -74,91 +25,6 @@
     </div>
 </body>
 
+<script type="text/javascript" src="assets/javascript/game.js"></script>
 
-
-<script type="text/javascript">
-    var dictionary = [
-        'parrot', 'cannon', 'blackbeard', 
-        'treasure', 'rum', 'scallywag', 'scurvy', 
-        'swashbuckler', 'nassau',
-        'matey', 'buccaneer', 'booty', 'ahoy', 'seadog'
-    ];
-    var wins = 0;
-    var winCount = 0;
-    var losses = 0;
-    var worongWord = document.getElementById('guesses');
-    var guessesLeft = 6;
-    var wrongLetters = [];
-    var userGuesses = [];
-    var usedLetters = [];
-    var answerArray = [];
-    var currentWord = dictionary[Math.floor(Math.random()*dictionary.length)];
-
-    function gameStart () {
-            console.log("word is: " + currentWord)    
-        // replaces letters in the random word with an _
-        for (var i = 0; i < currentWord.length; i++) {
-            answerArray.push("_");
-        }
-        console.log(answerArray);
-
-        //replaces , separating _'s with spaces and appears in html
-        document.getElementById("gameplay").textContent = answerArray.join(" ");
-        document.getElementById("lives").textContent = "Guesses Left: " + guessesLeft;
-        
-    }
-        
-    gameStart ();
-
-    //user press a key
-    
-    document.onkeyup = function(event) {
-        userGuesses = event.key;
-
-        //checks if letter pressed is in the word
-        if (currentWord.indexOf(userGuesses) > -1) { 
-            for (var j = 0; j < currentWord.length; j++) {
-                if (currentWord[j] === userGuesses) {
-                    answerArray[j] = userGuesses;
-                    console.log(answerArray);
-                    winCount ++;
-                    console.log(winCount);
-                    win ();
-                }
-            }
-        } 
-        else {
-            wrongLetters.push(userGuesses);
-            guessesLeft--;
-            loss ();
-            console.log(guessesLeft);
-        }
-
-        document.getElementById("guessed").textContent = "Guesses Left: " + wrongLetters;
-    
-    gameStart();
-
-    }
-    
-    function loss () {
-        if (guessesLeft === 0){
-            alert("Ye be out of guesses!! Time to walk the plank!")
-            losses ++;
-        }
-    document.getElementById("loss").textContent = "Losses: " + losses;
-    }
-
-    function win () {
-        if (winCount === currentWord.length) {
-            alert("Correct! Ye shall live another day!")
-            wins ++;
-        }
-    document.getElementById("wins").textContent = "Wins: " + wins;
-    }
-
-//no repeat letters
-//get rid of the duplicating loop part
-
-
-</script>
 </html>
